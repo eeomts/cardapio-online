@@ -1,7 +1,7 @@
 <?php 
 
 
-echo "erro"
+echo "erro 404"
 
 
 ?>

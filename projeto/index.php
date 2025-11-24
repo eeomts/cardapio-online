@@ -1,64 +1,47 @@
 <?php
 #requires
 require "config.php";
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/src/assets/vendor/autoload.php';
 require_once __DIR__ . '/src/models/ORDOX.php';
 
 
 $URL = new Url();
 $ordox = new ORDOX();
 
+?>
 
-$pagina_principal = $URL->getURL(0); // ordox
-$nome_loja = $URL->getURL(1);        // nome da loja
-$id_mesa = $URL->getURL(2);          // id da mesa
-
-
-if (empty($pagina_principal)) {
-    include("src/views/home.inc.php");
-    exit;
-}
-if ($pagina_principal === 'cardapio') {
-    if (!empty($nome_loja)) {
-        $todas_lojas = $ordox->SelectLojas();
-        $urls_amigaveis = [];
-        foreach ($todas_lojas as $loja) {
-            $urls_amigaveis[] = $loja['url_amg'];
-        }
-        if (in_array($nome_loja, $urls_amigaveis)) {
-            $loja_dados = $ordox->SelectLojas($nome_loja);
-            if (!empty($loja_dados)) {
-                $loja_info = $loja_dados[0];
-                $loja_id = $loja_info['id_loja'];
-                $loja_nome = $loja_info['nome_loja'];
-                $mesa_id = !empty($id_mesa) ? $id_mesa : null;
-                include("src/views/cardapio.inc.php");
-                exit;
-            }
-        }
-        include("src/views/404.inc.php");
-        exit;
-    }
-    echo "<pre>";
-    echo "<h1>Sistema OrdoX - QR Codes das Mesas</h1>";
-
-    $lojas = $ordox->MesaID();
-    $insert_urls = $ordox->gerarUrlAmigavel();
-    echo "<h2>Mesas cadastradas:</h2>";
-    foreach ($lojas as $loja) {
-        $n_mesas = $loja['mesas'];
-        $total_mesas = count($n_mesas);
-        echo "O número de mesas para {$loja['loja_nome']} é {$total_mesas} <br><br>";
-    }
-
-    echo "<hr>";
-    echo "<h2>QR Codes das mesas:</h2>";
-    $ordox->MesaQRcode();
-    echo "</pre>";
-    exit;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Food - Order Management</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--fontes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
-include("src/views/404.inc.php");
+    <!--styles-->
+    <link rel="stylesheet" href="src/assets/css/style_client.css">
+    <link rel="stylesheet" href="src/assets/vendor/owl-carousel/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="src/assets/vendor/owl-carousel/css/owl.theme.default.min.css" />
+
+</head>
+<body>
+
+<?php include_once "src/views/cardapio_inicio.inc.php" ?>
 
 
+<!--scripts-->
+<script src="src/assets/vendor/jquery/jquery-3.7.0.min.js"></script>
+<script src="src/assets/js/pages/script_client.js"></script>
+<script src="<?= $URL->getBase(); ?>src/assets/js/main.js" type="text/javascript"></script>
+
+<!--owl carrossel-->
+<script src="src/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+<script src="src/assets/vendor/owl-carousel/js/owlcarousel2-filter.min.js"></script>
+
+
+</body>
+</html>
