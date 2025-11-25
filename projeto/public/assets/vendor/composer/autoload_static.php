@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-use assets\vendor\composer\ClassLoader;
+use Composer\Autoload\ClassLoader;
 
 class ComposerStaticInit5726834464b54df5c26cde494ec31af2
 {

@@ -12,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="<?= $URL->getBase(); ?>public/assets/libs/toastr/toastr.min.css">
+    <!-- jQuery Confirm CSS -->
+    <link rel="stylesheet" href="<?= $URL->getBase(); ?>public/assets/libs/jqueryconfirm/css/jquery-confirm.css">
     <link rel="stylesheet" href="<?= $URL->getBase(); ?>public/assets/admin/css/styles.css">
 </head>
 <body>
@@ -93,6 +97,38 @@
         
     </div>
 
+    <!-- Scripts na ordem correta -->
+    <!-- jQuery Confirm JS -->
+    <script src="<?= $URL->getBase(); ?>public/assets/libs/jqueryconfirm/js/jquery-confirm.js"></script>
+    <!-- Toastr JS -->
+    <script src="<?= $URL->getBase(); ?>public/assets/libs/toastr/toastr.min.js"></script>
+    <script>
+        // Configuração do Toastr
+        if (typeof toastr !== 'undefined') {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        }
+    </script>
+    <!-- Default.js (deve vir antes do main.js) -->
+    <script src="<?= $URL->getBase(); ?>public/assets/js/classes/default.js"></script>
+    <!-- Main.js (usa Default) -->
+    <script src="<?= $URL->getBase(); ?>public/assets/js/main.js"></script>
+    <!-- Scripts do admin -->
     <script src="<?= $URL->getBase(); ?>public/assets/admin/js/script.js"></script>
     <!-- Scripts específicos da view podem ser injetados aqui se necessário, ou incluídos na própria view -->
 </body>

@@ -53,17 +53,44 @@ var Default = new Class({
     },
 	message: function( text, time, type ) {
 		if(type == 'remove'){
-			toastr.remove();
+			if (typeof toastr !== 'undefined') {
+				toastr.remove();
+			}
+			return false;
 		}	
+		
 		if(!this.isEmpty(text)){
-			toastr.remove();
-			if(!time)
-				time = false;	
-			if(!type)
-				type = 'alert';
+			// Verifica se toastr está disponível
+			if (typeof toastr === 'undefined') {
+				alert(text);
+				return false;
+			}
+			
+			// Remove notificações anteriores se necessário
+			toastr.clear();
+			
+			// Configura tempo
+			if(!time || time === false)
+				time = 3000;	
+			
+			// Mapeia tipos para toastr
+			var toastrType = 'info'; // padrão
+			if (type === 'success') {
+				toastrType = 'success';
+			} else if (type === 'error') {
+				toastrType = 'error';
+			} else if (type === 'warning' || type === 'warn') {
+				toastrType = 'warning';
+			} else if (type === 'info' || type === 'alert') {
+				toastrType = 'info';
+			}
+			
+			// Configura opções
 			toastr.options.timeOut = time;
-			toastr.options.closeButton = true;			
-			toastr[type](text);  
+			toastr.options.closeButton = true;
+			
+			// Exibe a notificação
+			toastr[toastrType](text);  
 		}
 		
 		return false;

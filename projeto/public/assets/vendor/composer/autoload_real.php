@@ -8,13 +8,13 @@ class ComposerAutoloaderInit5726834464b54df5c26cde494ec31af2
 
     public static function loadClassLoader($class)
     {
-        if ('assets\vendor\composer\ClassLoader' === $class) {
+        if ('Composer\Autoload\ClassLoader' === $class) {
             require __DIR__ . '/ClassLoader.php';
         }
     }
 
     /**
-     * @return \assets\vendor\composer\ClassLoader
+     * @return \Composer\Autoload\ClassLoader
      */
     public static function getLoader()
     {
@@ -25,7 +25,7 @@ class ComposerAutoloaderInit5726834464b54df5c26cde494ec31af2
         require __DIR__ . '/platform_check.php';
 
         spl_autoload_register(array('ComposerAutoloaderInit5726834464b54df5c26cde494ec31af2', 'loadClassLoader'), true, true);
-        self::$loader = $loader = new \assets\vendor\composer\ClassLoader(\dirname(__DIR__));
+        self::$loader = $loader = new \Composer\Autoload\ClassLoader(\dirname(__DIR__));
         spl_autoload_unregister(array('ComposerAutoloaderInit5726834464b54df5c26cde494ec31af2', 'loadClassLoader'));
 
         require __DIR__ . '/autoload_static.php';
