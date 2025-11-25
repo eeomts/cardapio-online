@@ -1,5 +1,4 @@
 <?php
-echo "cardapios";
 //
 //$nome_loja = $URL->getURL(1);
 //$id_mesa = $URL->getURL(2);
@@ -119,6 +118,7 @@ echo "cardapios";
 ?>
 <!--HTMLLLLLLLLLLLLLLLLLLLL a ajustar-->
 <!-- Menu 1 -->
+
 <div class="menu-container" id="menu1">
     <!-- Background Image with Overlay -->
     <div class="hero-section">
@@ -127,31 +127,7 @@ echo "cardapios";
 
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <button class="icon-btn back-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M15 18L9 12L15 6" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round"/>
-            </svg>
-        </button>
-        <div class="header-icons">
-            <button class="icon-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <rect x="4" y="4" width="6" height="6" fill="#ffffff"/>
-                    <rect x="14" y="4" width="6" height="6" fill="#ffffff"/>
-                    <rect x="4" y="14" width="6" height="6" fill="#ffffff"/>
-                    <rect x="14" y="14" width="6" height="6" fill="#ffffff"/>
-                </svg>
-            </button>
-            <button class="icon-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M9 2L7.17 4H4C2.9 4 2 4.9 2 6V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V6C22 4.9 21.1 4 20 4H16.83L15 2H9ZM7 11V9H9V11H11V13H9V15H7V13H5V11H7ZM18 16H14V14H18V16Z"
-                          fill="#ffffff"/>
-                </svg>
-            </button>
-        </div>
-    </header>
+
 
     <!-- Food Category Section -->
     <section class="category-section">
@@ -164,7 +140,7 @@ echo "cardapios";
         <div class="food-carousel owl-carousel"
              data-owl-options='{
             "items": 3,
-            "margin": 13,
+            "margin": 20,
             "smartSpeed": 600,
             "loop": false,
             "autoplay": true,

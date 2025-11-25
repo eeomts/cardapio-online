@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../assets/vendor/autoload.php';
+// require_once __DIR__ . '/../assets/vendor/autoload.php';
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
 
@@ -13,7 +13,7 @@ class ORDOX
     function __construct()
     {
 
-        $this->db  = new DB();
+        $this->db = new DB();
     }
 
 
@@ -78,7 +78,6 @@ SELECT
 
     }
 
-    
 
     public function MesaID()
     {
@@ -110,7 +109,6 @@ SELECT
 
         return $resultado;
     }
-
 
 
     function gerarUrlAmigavel()
@@ -164,7 +162,7 @@ SELECT
     public function MesaQRcode()
     {
         $lojas = $this->MesaID();
-    
+
         foreach ($lojas as $loja) {
             echo "<h2>{$loja['loja_nome']} (ID: {$loja['loja_id']})</h2>";
             $urls = $loja['url'];
@@ -180,10 +178,10 @@ SELECT
                 $link = BASE_URL . "cardapio/{$urls}/{$id}";
 
                 $qrCode = new QrCode($link);
-                $qrCode->setSize(400); 
-                $qrCode->setMargin(20); 
+                $qrCode->setSize(400);
+                $qrCode->setMargin(20);
                 $dataUri = $qrCode->writeDataUri();
-                
+
                 // Alinha o QR Code com o texto da mesa
                 echo "<p style='display:flex; align-items:center; gap:10px; margin-bottom:5px;'>";
                 echo "<span>Mesa: {$nome} | ID: {$id}</span>";
@@ -194,19 +192,17 @@ SELECT
             echo "<hr>";
         }
     }
-    
 
-    //     public function InsertMesas()
-    // {
-    //     $array_mesas = range(1, 10000);
-    //     $db = $this->db;
 
-    //     foreach ($array_mesas as $id) {
-    //         $nomeMesa = "mesa " . $id;
-    //         $query = "INSERT INTO custom_mesas (nome) VALUES ('$nomeMesa')";
-    //         $db->executeSql($query);
-    //     }
+    public function SetarMesasComoLivres()
+    {
+        $db = $this->db;
 
-    //     echo "mesas inseridas com sucesso!";
-    // }
+        // Atualiza todas as mesas de uma vez só
+        $query = "UPDATE custom_mesas SET fk_status_mesa = 1";
+
+        $db->executeSql($query);
+
+        echo "Todas as mesas foram atualizadas para status = 1 (Livre).";
+    }
 }

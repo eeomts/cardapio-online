@@ -1,47 +1,51 @@
 <?php
 #requires
 require "config.php";
-require_once __DIR__ . '/src/assets/vendor/autoload.php';
-require_once __DIR__ . '/src/models/ORDOX.php';
+// require_once __DIR__ . '/src/assets/vendor/autoload.php';
+// require_once __DIR__ . '/src/models/ORDOX.php';
 
 
 $URL = new Url();
 $ordox = new ORDOX();
 
+// Roteamento Melhorado
+$URL->getURLList(); // Força o processamento da URL
+$url_segments = $URL->pag;
+
+// Filtra elementos vazios e reindexa o array
+$url_segments = array_values(array_filter($url_segments, function($value) {
+    return $value !== '' && $value !== null;
+}));
+
+// Pega o primeiro segmento como página, ou 'home' se não houver
+$pagina = $url_segments[0] ?? 'home';
+$subpagina = $url_segments[1] ?? null;
+
+switch ($pagina) {
+    case 'admin':
+        // Define qual view interna carregar
+        $contentView = "";
+        switch ($subpagina) {
+            case 'usuarios':
+                $contentView = "src/Views/Admin/usuarios.inc.php";
+                break;
+            case 'pedidos':
+                $contentView = "src/Views/Admin/pedidos.inc.php";
+                break;
+            default:
+                // Se acessar /admin sem subpagina, vai para pedidos (dashboard)
+                $contentView = "src/Views/Admin/pedidos.inc.php";
+                break;
+        }
+        
+        // Carrega o layout mestre, que por sua vez inclui a $contentView
+        include "src/Views/Admin/layout.php";
+        break;
+
+    case 'home':
+    default:
+        // Carrega o layout padrão da home (cliente)
+        include "src/views/home_layout.php";
+        break;
+}
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <title>Food - Order Management</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--fontes-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-
-    <!--styles-->
-    <link rel="stylesheet" href="src/assets/css/style_client.css">
-    <link rel="stylesheet" href="src/assets/vendor/owl-carousel/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="src/assets/vendor/owl-carousel/css/owl.theme.default.min.css" />
-
-</head>
-<body>
-
-<?php include_once "src/views/cardapio_inicio.inc.php" ?>
-
-
-<!--scripts-->
-<script src="src/assets/vendor/jquery/jquery-3.7.0.min.js"></script>
-<script src="src/assets/js/pages/script_client.js"></script>
-<script src="<?= $URL->getBase(); ?>src/assets/js/main.js" type="text/javascript"></script>
-
-<!--owl carrossel-->
-<script src="src/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
-<script src="src/assets/vendor/owl-carousel/js/owlcarousel2-filter.min.js"></script>
-
-
-</body>
-</html>
