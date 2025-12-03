@@ -1,8 +1,23 @@
 <?php
 // pedidos.inc.php - Conteúdo da view
 ?>
+</main>
+<script>
+    $(document).ready(function() {
+        // Tab switching logic
+        $('.order-tab').click(function() {
+            $('.order-tab').removeClass('active'); // Remove active de todas, mas mantem as cores de status
+            // Nota: O CSS original pode usar active para styling, então talvez precisemos de uma classe especifica para seleção
+            // ou apenas adicionar uma borda/indicador.
+            $(this).addClass('active-tab'); // Classe ficticia para indicar seleção se 'active' conflitar
+            
+            const status = $(this).data('status');
+            console.log('Filtrando por:', status);
+            // AJAX para carregar pedidos por status
+        });
+    });
+</script>
 <main class="main-content">
-    <!-- Search Bar -->
     <div class="search-bar">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none">
             <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
@@ -10,11 +25,7 @@
         </svg>
         <input type="text" placeholder="Buscar pedido" id="searchInput">
     </div>
-
-    <!-- Order List Title -->
     <h2 class="order-list-title">Lista de Pedidos</h2>
-
-    <!-- Order Tabs -->
     <div class="order-tabs">
         <button class="order-tab active" data-status="todos">Todos</button>
         <button class="order-tab pending" data-status="recebido">Recebidos</button>
@@ -22,10 +33,7 @@
         <button class="order-tab completed" data-status="pronto">Prontos</button>
         <button class="order-tab rejected" data-status="cancelado">Cancelados</button>
     </div>
-
-    <!-- Orders Grid -->
     <div class="orders-grid" id="ordersGrid">
-        <!-- Exemplo estático -->
         <div class="order-card">
             <div class="order-header">
                 <span class="order-id">#1234</span>
@@ -54,19 +62,3 @@
         </div>
     </div>
 </main>
-
-<script>
-    $(document).ready(function() {
-        // Tab switching logic
-        $('.order-tab').click(function() {
-            $('.order-tab').removeClass('active'); // Remove active de todas, mas mantem as cores de status
-            // Nota: O CSS original pode usar active para styling, então talvez precisemos de uma classe especifica para seleção
-            // ou apenas adicionar uma borda/indicador.
-            $(this).addClass('active-tab'); // Classe ficticia para indicar seleção se 'active' conflitar
-            
-            const status = $(this).data('status');
-            console.log('Filtrando por:', status);
-            // AJAX para carregar pedidos por status
-        });
-    });
-</script>

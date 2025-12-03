@@ -19,16 +19,12 @@
     <link rel="stylesheet" href="<?= $URL->getBase(); ?>public/assets/admin/css/styles.css">
 </head>
 <body>
-    <!-- Background -->
     <div class="background">
         <div class="gradient-blob gradient-1"></div>
         <div class="gradient-blob gradient-2"></div>
         <div class="gradient-blob gradient-3"></div>
     </div>
-
-    <!-- Main Container -->
     <div class="container">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <span class="f">f</span>oo<span class="d">d</span>
@@ -38,9 +34,8 @@
                 </div>
                 <div class="logo-smile"></div>
             </div>
-
             <nav class="nav-menu">
-                <div class="nav-item <?= (strpos($_SERVER['REQUEST_URI'], 'pedidos') !== false || $_SERVER['REQUEST_URI'] == '/admin') ? 'active' : '' ?>" onclick="window.location.href='<?= $URL->getBase(); ?>admin/pedidos'">
+                <div class="nav-item active">
                     <div class="icon">
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -49,7 +44,6 @@
                     </div>
                     <span>HOME</span>
                 </div>
-
                 <div class="nav-item">
                     <div class="icon">
                         <svg viewBox="0 0 24 24" fill="none">
@@ -59,8 +53,7 @@
                     </div>
                     <span>HISTÓRICO</span>
                 </div>
-
-                <div class="nav-item <?= (strpos($_SERVER['REQUEST_URI'], 'usuarios') !== false) ? 'active' : '' ?>" onclick="window.location.href='<?= $URL->getBase(); ?>admin/usuarios'">
+                <div class="nav-item">
                     <div class="icon">
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -71,7 +64,6 @@
                     <span>USUÁRIOS</span>
                 </div>
             </nav>
-
             <div class="logout">
                 <div class="nav-item">
                     <div class="icon">
@@ -85,18 +77,11 @@
                 </div>
             </div>
         </aside>
-
         <!-- Main Content Area -->
-        <?php 
-        if (isset($contentView) && file_exists($contentView)) {
-            include $contentView;
-        } else {
-            echo "<main class='main-content'><h1>Erro: View não encontrada.</h1></main>";
-        }
-        ?>
-        
+        <main class="main-content">
+            <!-- Conteúdo da view será inserido aqui -->
+        </main>
     </div>
-
     <!-- Scripts na ordem correta -->
     <!-- jQuery Confirm JS -->
     <script src="<?= $URL->getBase(); ?>public/assets/libs/jqueryconfirm/js/jquery-confirm.js"></script>
