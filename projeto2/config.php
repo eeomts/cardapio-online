@@ -49,7 +49,7 @@ if (strstr($_SERVER['SERVER_NAME'], "contratafashion.com")) {
 
     define("PDO_HOST", "localhost");
     define("PDO_USER", "root");
-    define("PDO_DB", "ordox2");
+    define("PDO_DB", "ordox_laravel");
     define("PDO_PASS", "");
 
     define("PDO_DRIVER", "mysql");

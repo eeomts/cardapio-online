@@ -53,8 +53,10 @@ class Main
 
     public function getAllUsers()
     {
-        $sql = "SELECT * FROM custom_usuarios ORDER BY id DESC";
-        return $this->db->executeSql($sql);
+        $db = $this->db;
+        $db -> executeSql("SELECT custom_usuarios.id, custom_usuarios.nome,custom_usuarios.tel_telefone,custom_cargos.nome as cargo,custom_status_usuario.nome as status_usuario FROM custom_usuarios LEFT JOIN custom_status_usuario on custom_status_usuario.id = custom_usuarios.fk_status_usuario LEFT JOIN custom_cargos on custom_cargos.id = custom_usuarios.fk_cargos");
+        $result = $db->fetchAll();
+        return $result;
     }
 
     public function deleteUser($id)
